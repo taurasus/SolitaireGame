@@ -20,15 +20,19 @@
 </TABLE>
 </html>
 -->
+<head>
+  <link rel="stylesheet" type="text/css" href="css.css">
+</head>
 <?php
 
 function affichagePlateau() {
     $html = "<html> \n";
-    $html .= " \t <table border> \n";
+    $html .= "\t <table border> \n";
     for ($i = 0; $i < 7; $i++) { // lignes du plateau
-        $html .= " \t \t <tr> \n";
+        $html .= "\t \t <tr> \n";
         for ($j = 0; $j < 7; $j++) { // colonnes du plateau
-            $html .= " \t \t \t <td>";
+            $html .= "\t \t \t <td>";
+            $html .= '<button class="classe" type="submit" name="bille">';
             if ($i > 1 && $i < 5) { // remplissage des lignes 2 à 4
                 $html .= '<img src="../../image/bille.png" width="40" name="bille" />';
             } elseif ($i < 2 || $i > 4 && $i < 7) { // remplissage des lignes 0,1,5 et 6
@@ -36,7 +40,7 @@ function affichagePlateau() {
                     $html .= '<img src="../../image/bille.png" width="40" name="bille" />';
                 }
             }
-            $html .= "</td> \n";
+            $html .= "</button></td> \n";
         }
         $html .= "\t \t </tr> \n";
     }
