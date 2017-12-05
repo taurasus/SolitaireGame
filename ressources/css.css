@@ -12,3 +12,33 @@ td{
     width: 40px;
     height: 40px;
 }
+
+.circlered {
+    background-color:#fff;
+    border:1px solid red;    
+    height:40px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    width:40px;
+}
+
+.circleborderblack {
+    background-color:#fff;
+    border:1px solid black;    
+    height:40px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    width:40px;
+}
+
+.circleblack {
+    background-color:#000   ;
+    border:1px solid black;    
+    height:40px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    width:40px;
+}
