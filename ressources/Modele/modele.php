@@ -52,16 +52,15 @@ class Modele {
 // post-condition retourne vrai si le pseudo existe sinon faux
 // si un problÃ¨me est rencontrÃ©, une exception de type TableAccesException est levÃ©e
     public function exists($username, $password) {
-
-        $statement = $this->connexion->prepare("select pseudo from joueurs where pseudo=?"); // mot de passe à ajouter en requête
+        $statement = $this->connexion->prepare("select pseudo,motDePasse from joueurs where pseudo=? and motDePasse=?"); // mot de passe à ajouter en requête
         $statement->bindParam(1, $pseudoParam);
-        //$statement->bindParam(2, $motDePasseParam);
+        $statement->bindParam(2, $motDePasseParam);
         $pseudoParam = $username;
-        //$motDePasseParam = crypt($password);
+        $motDePasseParam = crypt($password,$password);
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-        if ($result['pseudo'] != NUll) {
+        if ($result['pseudo'] != NUll && $result['motDePasse']) {
             return true;
         } else {
             return false;

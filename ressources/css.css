@@ -13,9 +13,9 @@ td{
     height: 40px;
 }
 
-.circlered {
+.circleblackborder{
     background-color:#fff;
-    border:1px solid red;    
+    border:1px solid black;    
     height:40px;
     border-radius:50%;
     -moz-border-radius:50%;
@@ -23,9 +23,9 @@ td{
     width:40px;
 }
 
-.circleborderblack {
-    background-color:#fff;
-    border:1px solid black;    
+.circleblackborderrouge {
+    background-color:#000;
+    border:1px solid red;    
     height:40px;
     border-radius:50%;
     -moz-border-radius:50%;
