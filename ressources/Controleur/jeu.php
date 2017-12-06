@@ -6,7 +6,8 @@ require_once PATH_MODELE . "/modele.php";
 class Jeu {
 
     private $vue;
-    private $model;
+    private $modele;
+    private $jeu;
 
     function __construct() {
         $this->vue = new Vue();
@@ -20,12 +21,24 @@ class Jeu {
         $y = intval($coordonnees[1]);
         $status = intval($coordonnees[2]);
         if ($status == 0) {
-            $border = 'circleblackborder';
+            $this->caseBlanche($x, $y);
         } else {
-            $border = 'circleblack';
-        }
-        $this->vue->affichagePlateau($border, $x, $y);
-        echo $bille;
+          $this->caseBlanche($x, $y);
+    }
+    echo $bille;
+  }
+
+    function billeNoire($x, $y){
+      $border = 'circleblackborderrouge';
+      $this->vue->affichagePlateau($border, $x, $y);
     }
 
+    function caseBlanche($x, $y){
+      $border = 'circleblack';
+      $this->vue->affichagePlateau($border, $x, $y);
+    }
+
+    function moveBille($bille){
+      $coordonnees;
+    }
 }

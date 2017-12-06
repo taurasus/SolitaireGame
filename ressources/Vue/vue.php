@@ -14,7 +14,7 @@ class Vue {
     function affichagePlateau() {
         $html = "<html> \n";
         $html .= '<head><link rel="stylesheet" type="text/css" href="css.css"></head>';
-        $html .= '<body bgcolor="#F5F5F5">';
+        $html .= '<body bgcolor="#FFFFFF">';
         $html .= "\n \t <table> \n";
         for ($i = 0; $i < 7; $i++) { // lignes du plateau
             $html .= "\t \t <tr> \n";
