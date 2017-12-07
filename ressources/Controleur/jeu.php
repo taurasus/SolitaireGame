@@ -21,24 +21,16 @@ class Jeu {
         $y = intval($coordonnees[1]);
         $status = intval($coordonnees[2]);
         if ($status == 0) {
-            $this->caseBlanche($x, $y);
+            $changeStatus = 0;
+            $this->vue->affichageJeu($x, $y, $changeStatus);
         } else {
-          $this->caseBlanche($x, $y);
+            $changeStatus = 1;
+            $this->vue->affichageJeu($x, $y, $changeStatus);
     }
     echo $bille;
   }
 
-    function billeNoire($x, $y){
-      $border = 'circleblackborderrouge';
-      $this->vue->affichagePlateau($border, $x, $y);
-    }
-
-    function caseBlanche($x, $y){
-      $border = 'circleblack';
-      $this->vue->affichagePlateau($border, $x, $y);
-    }
-
-    function moveBille($bille){
+    /*function moveBille($bille){
       $coordonnees;
-    }
+    }*/
 }

@@ -17,7 +17,7 @@ define("PATH_METIER",HOME_SITE."/Metier");
 // remplacer les X par vos identifiants de connexion Ã  mysql
 
 define("HOST","localhost");
-define("BD","E164730E");
-define("LOGIN","E164730E");
-define("PASSWORD","E164730E");
+define("BD","projetphp");
+define("LOGIN","root");
+define("PASSWORD","");
 ?>
