@@ -18,6 +18,7 @@ class Routeur {
     public function routerRequete() {
         if ((isset($_POST['username'])) && (isset($_POST['password']))) {
             $this->ctrlAuthentification->verification($_POST['username'], $_POST['password']);
+            $this->jeu->constructTab();
         } elseif (isset($_POST['bille'])) {
             $this->jeu->clickBille($_POST['bille']);
         } else {
