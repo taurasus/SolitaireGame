@@ -3,23 +3,6 @@
 require_once PATH_VUE . "/vue.php";
 require_once PATH_MODELE . "/modele.php";
 
-// Classe generale de definition d'exception
-class MonException extends Exception{
-  private $chaine;
-  public function __construct($chaine){
-    $this->chaine=$chaine;
-  }
-
-  public function afficher(){
-    return $this->chaine;
-  }
-
-}
-
-// Exception relative à un probleme de connexion
-class ErrorChoice extends MonException{
-}
-
 class Jeu {
 
     private $vue;
@@ -50,37 +33,62 @@ class Jeu {
       $x = intval($coordonnees[0]);
       $y = intval($coordonnees[1]);
       $error = false;
-
-      if ($_SESSION['plateau'][$x][$y] == 'X') {
+  //    $_SESSION['plateauPrecedent'] = $_SESSION['plateau'];
+      if ($_SESSION['plateau'][$x][$y] == 'X' && $_SESSION['selection'] == false) {
         $_SESSION['plateau'][$x][$y] = '+';
-      } elseif ($_SESSION['plateau'][$x][$y] == 'O') {
+        $_SESSION['selection'] = true;
+      } elseif ($_SESSION['plateau'][$x][$y] == 'O' && $_SESSION['selection'] == true) {
         if ($_SESSION['plateau'][$x+1][$y] == 'X' && $_SESSION['plateau'][$x+2][$y] == '+'){
           $_SESSION['plateau'][$x][$y] = 'X';
           $_SESSION['plateau'][$x+1][$y] = 'O';
           $_SESSION['plateau'][$x+2][$y] = 'O';
+          $_SESSION['selection'] = false;
         } elseif ($_SESSION['plateau'][$x-1][$y] == 'X' && $_SESSION['plateau'][$x-2][$y] == '+'){
           $_SESSION['plateau'][$x][$y] = 'X';
           $_SESSION['plateau'][$x-1][$y] = 'O';
           $_SESSION['plateau'][$x-2][$y] = 'O';
+          $_SESSION['selection'] = false;
         } elseif ($_SESSION['plateau'][$x][$y+1] == 'X' && $_SESSION['plateau'][$x][$y+2] == '+'){
           $_SESSION['plateau'][$x][$y] = 'X';
           $_SESSION['plateau'][$x][$y+1] = 'O';
           $_SESSION['plateau'][$x][$y+2] = 'O';
+          $_SESSION['selection'] = false;
         } elseif ($_SESSION['plateau'][$x][$y-1] == 'X' && $_SESSION['plateau'][$x][$y-2] == '+'){
           $_SESSION['plateau'][$x][$y] = 'X';
           $_SESSION['plateau'][$x][$y-1] = 'O';
           $_SESSION['plateau'][$x][$y-2] = 'O';
+          $_SESSION['selection'] = false;
         } else {
           $error = true;
         }
+      } elseif ($_SESSION['plateau'][$x][$y] == '+' && $_SESSION['selection'] == true) {
+        $_SESSION['plateau'][$x][$y] = 'X';
+        $_SESSION['selection'] = false;
       } else {
         $error = true;
       }
-      if($error == true){
+
+      if($error == false){
+      //  $_SESSION['ax'] = $x;
+      //  $_SESSION['ay'] = $y;
         $this->vue->affichageJeu();
-        echo $bille;
+          $this->instruction();
       } else {
+      //  $_SESSION['plateauPrecedent'][$_SESSION['ax']][$_SESSION['ay']] == 'X';
+        $this->vue->affichageJeu();
+          $this->instruction();
         echo 'Erreur de deplacement';
+    //    $_SESSION['plateau'] = $_SESSION['plateauPrecedent'];
+      }
+    }
+
+    function instruction(){
+      if ($_SESSION['selection'] = false){
+        echo 'Selectionner une bille noire à déplacer';
+      } elseif ($_SESSION['selection'] = true){
+        echo 'Choisir un emplacement libre';
+      } else{
+        echo 'Error';
       }
     }
 }

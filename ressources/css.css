@@ -1,6 +1,18 @@
+h1
+{
+    text-align:center;
+    font-style:italic;
+    text-decoration:underline;
+    font-size:3em;
+    text-shadow:1px 1px 1px black;
+}
 button{
     border: 0px;
     background-color: transparent;
+}
+
+table {
+  margin: 0 auto;
 }
 
 .classe{
