@@ -16,15 +16,29 @@ class Jeu {
     }
 
     function constructTab() {
-        $_SESSION['plateau'] = array();
-        $tab[0] = array('/', '/', 'X', 'X', 'X', '/', '/');
-        $tab[1] = array('/', '/', 'X', 'X', 'X', '/', '/');
-        $tab[2] = array('X', 'X', 'X', 'X', 'X', 'X', 'X');
-        $tab[3] = array('X', 'X', 'X', 'O', 'X', 'X', 'X');
-        $tab[4] = array('X', 'X', 'X', 'X', 'X', 'X', 'X');
-        $tab[5] = array('/', '/', 'X', 'X', 'X', '/', '/');
-        $tab[6] = array('/', '/', 'X', 'X', 'X', '/', '/');
+        $tan = array();
+        $tab[0] = array('/', '/', '/', '/', '/', '/', '/', '/', '/');
+        $tab[1] = array('/', '/', '/', 'O', 'O', 'O', '/', '/', '/');
+        $tab[2] = array('/', '/', '/', 'O', 'O', 'O', '/', '/', '/');
+        $tab[3] = array('/', 'O', 'O', 'O', 'X', 'O', 'X', 'O', '/');
+        $tab[4] = array('/', 'O', 'O', 'X', 'O', 'O', 'O', 'O', '/');
+        $tab[5] = array('/', 'O', 'O', 'O', 'O', 'X', 'O', 'O', '/');
+        $tab[6] = array('/', '/', '/', 'O', 'X', 'O', '/', '/', '/');
+        $tab[7] = array('/', '/', '/', 'O', 'X', 'O', '/', '/', '/');
+        $tab[8] = array('/', '/', '/', '/', '/', '/', '/', '/', '/');
         $_SESSION['plateau'] = $tab;
+        /*
+          $tan = array();
+          $tab[0] = array('/', '/', '/', '/', '/', '/', '/', '/', '/');
+          $tab[1] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
+          $tab[2] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
+          $tab[3] = array('/', 'X', 'X', 'X', 'X', 'X', 'X', 'X', '/');
+          $tab[4] = array('/', 'X', 'X', 'X', 'O', 'X', 'X', 'X', '/');
+          $tab[5] = array('/', 'X', 'X', 'X', 'X', 'X', 'X', 'X', '/');
+          $tab[6] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
+          $tab[7] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
+          $tab[8] = array('/', '/', '/', '/', '/', '/', '/', '/', '/');
+          $_SESSION['plateau'] = $tab; */
     }
 
     function clickBille($bille) {
@@ -32,7 +46,6 @@ class Jeu {
         $x = intval($coordonnees[0]);
         $y = intval($coordonnees[1]);
         $error = false;
-        //    $_SESSION['plateauPrecedent'] = $_SESSION['plateau'];
         if ($_SESSION['plateau'][$x][$y] == 'X' && $_SESSION['selection'] == false) {
             $_SESSION['plateau'][$x][$y] = '+';
             $_SESSION['selection'] = true;
@@ -68,49 +81,67 @@ class Jeu {
         }
 
         if ($error == false) {
-            //  $_SESSION['ax'] = $x;
-            //  $_SESSION['ay'] = $y;
-            $this->vue->affichageJeu();
-            $victoire = $this->victoire();
-            $this->instruction($victoire);
-        } else {
-            //  $_SESSION['plateauPrecedent'][$_SESSION['ax']][$_SESSION['ay']] == 'X';
-            $this->vue->affichageJeu();
-            $victoire = $this->victoire();
-            $this->instruction($victoire);
-            echo '<br> <br> Erreur de déplacement';
-            //    $_SESSION['plateau'] = $_SESSION['plateauPrecedent'];
-        }
-    }
-
-    function instruction($victoire) {
-        if ($victoire == 'true') {
-            echo 'Victoire !';
-        } else {
-            if ($_SESSION['selection'] == false) {
-                echo 'Selectionner une bille noire à déplacer';
-            } elseif ($_SESSION['selection'] == true) {
-                echo 'Choisir un emplacement libre';
+            $status = $this->status();
+            if ($status == 'win') {
+                $this->vue->affichageVictoire();
+            } elseif ($status == 'loose') {
+                 $this->vue->affichageDefaite();
             } else {
-                echo 'Error';
+                $this->vue->affichageJeu();
+                $this->instruction();
             }
+        } else {
+            $this->vue->affichageJeu();
+            $this->instruction();
         }
     }
 
-    function victoire() {
+    function instruction() {
+
+        if ($_SESSION['selection'] == false) {
+            $html = '<div class="instruction"> Selectionner une bille noire à déplacer </div>';
+        } elseif ($_SESSION['selection'] == true) {
+            $html = '<div class="instruction"> Choisir un emplacement libre </div>';
+        } else {
+            $html = '<div class="instruction"> Erreur de déplacement </div>';
+        }
+
+        echo $html;
+    }
+
+    function status() {
         $nbBlack = 0;
-        for ($i = 0; $i < 7; $i++) {
-            for ($j = 0; $j < 7; $j++) {
-                if ($_SESSION['plateau'][$i][$j] == 'X') {
+        $possibilite = 0;
+        for ($i = 0; $i < 9; $i++) {
+            for ($j = 0; $j < 9; $j++) {
+                if ($_SESSION['plateau'][$i][$j] == 'X' || $_SESSION['plateau'][$i][$j] == '+') {
                     $nbBlack++;
+
+                    if ($_SESSION['plateau'][$i + 1][$j] == 'X') {
+                        if ($_SESSION['plateau'][$i + 2][$j] == 'O') {
+                            $possibilite++;
+                        }
+                    } elseif ($_SESSION['plateau'][$i - 1][$j] == 'X') {
+                        if ($_SESSION['plateau'][$i - 2][$j] == 'O') {
+                            $possibilite++;
+                        }
+                    } elseif ($_SESSION['plateau'][$i][$j + 1] == 'X') {
+                        if ($_SESSION['plateau'][$i][$j + 2] == 'O') {
+                            $possibilite++;
+                        }
+                    } elseif ($_SESSION['plateau'][$i][$j - 1] == 'X') {
+                        if ($_SESSION['plateau'][$i][$j - 2] == 'O') {
+                            $possibilite++;
+                        }
+                    }
                 }
             }
         }
 
-        if ($nbBlack == 1) {
-            return $victoire = 'true';
-        } else {
-            return $victoire = 'false';
+        if ($possibilite == 0 && $nbBlack != 1) {
+            return $victoire = 'loose';
+        } elseif ($nbBlack == 1) {
+            return $victoire = 'win';
         }
     }
 
