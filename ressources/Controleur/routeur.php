@@ -12,6 +12,7 @@ class Routeur {
     public function __construct() {
         $this->ctrlAuthentification = new ControleurAuthentification();
         $this->jeu = new Jeu();
+        $this->vue = new Vue();
     }
 
     // Traite une requète entrante
@@ -21,6 +22,9 @@ class Routeur {
             $this->jeu->constructTab();
         } elseif (isset($_POST['bille'])) {
             $this->jeu->clickBille($_POST['bille']);
+        } elseif (isset($_POST['reset'])) {
+            $this->jeu->constructTab();
+            $this->vue->affichagePlateau();
         } else {
             $this->ctrlAuthentification->accueil();
         }
@@ -28,4 +32,3 @@ class Routeur {
 
 }
 
-?>

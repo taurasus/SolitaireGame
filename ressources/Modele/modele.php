@@ -52,7 +52,7 @@ class Modele {
 // post-condition retourne vrai si le pseudo existe sinon faux
 // si un problÃ¨me est rencontrÃ©, une exception de type TableAccesException est levÃ©e
     public function exists($username, $password) {
-        $statement = $this->connexion->prepare("select pseudo,motDePasse from joueurs where pseudo=? and motDePasse=?"); // mot de passe à ajouter en requête
+        $statement = $this->connexion->prepare("select pseudo, motDePasse from joueurs where pseudo=? and motDePasse=?"); // mot de passe à ajouter en requête
         $statement->bindParam(1, $pseudoParam);
         $statement->bindParam(2, $motDePasseParam);
         $pseudoParam = $username;
@@ -65,6 +65,15 @@ class Modele {
         } else {
             return false;
         }
+    }
+    
+    public function pourcentage($username) {
+        $statement = $this->connexion->prepare("select partieGagnee*100/nbPartie from parties where pseudo=?");
+        $statement->bindParam(1, $pseudoParam);
+        $pseudoParam = $username;
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return($result);
     }
 
 }
