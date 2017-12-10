@@ -18,27 +18,15 @@ class Jeu {
     function constructTab() {
         $tan = array();
         $tab[0] = array('/', '/', '/', '/', '/', '/', '/', '/', '/');
-        $tab[1] = array('/', '/', '/', 'O', 'O', 'O', '/', '/', '/');
-        $tab[2] = array('/', '/', '/', 'O', 'O', 'O', '/', '/', '/');
-        $tab[3] = array('/', 'O', 'O', 'O', 'X', 'O', 'X', 'O', '/');
-        $tab[4] = array('/', 'O', 'O', 'X', 'O', 'O', 'O', 'O', '/');
-        $tab[5] = array('/', 'O', 'O', 'O', 'O', 'X', 'O', 'O', '/');
-        $tab[6] = array('/', '/', '/', 'O', 'X', 'O', '/', '/', '/');
-        $tab[7] = array('/', '/', '/', 'O', 'X', 'O', '/', '/', '/');
+        $tab[1] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
+        $tab[2] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
+        $tab[3] = array('/', 'X', 'X', 'X', 'X', 'X', 'X', 'X', '/');
+        $tab[4] = array('/', 'X', 'X', 'X', 'O', 'X', 'X', 'X', '/');
+        $tab[5] = array('/', 'X', 'X', 'X', 'X', 'X', 'X', 'X', '/');
+        $tab[6] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
+        $tab[7] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
         $tab[8] = array('/', '/', '/', '/', '/', '/', '/', '/', '/');
         $_SESSION['plateau'] = $tab;
-        /*
-          $tan = array();
-          $tab[0] = array('/', '/', '/', '/', '/', '/', '/', '/', '/');
-          $tab[1] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
-          $tab[2] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
-          $tab[3] = array('/', 'X', 'X', 'X', 'X', 'X', 'X', 'X', '/');
-          $tab[4] = array('/', 'X', 'X', 'X', 'O', 'X', 'X', 'X', '/');
-          $tab[5] = array('/', 'X', 'X', 'X', 'X', 'X', 'X', 'X', '/');
-          $tab[6] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
-          $tab[7] = array('/', '/', '/', 'X', 'X', 'X', '/', '/', '/');
-          $tab[8] = array('/', '/', '/', '/', '/', '/', '/', '/', '/');
-          $_SESSION['plateau'] = $tab; */
     }
 
     function clickBille($bille) {
@@ -84,8 +72,21 @@ class Jeu {
             $status = $this->status();
             if ($status == 'win') {
                 $this->vue->affichageVictoire();
+                $this->modele->incrementePG($_SESSION['username']);
+               // $this->modele->joueurRegulier();
+                $this->modele->classementJoueurs();
+                $this->modele->getPartieGagnee($_SESSION['username']);
+                $this->modele->getNbPartie($_SESSION['username']);
+                // $this->modele->totalPartie();
+                // $this->modele->totalGagnee();
             } elseif ($status == 'loose') {
-                 $this->vue->affichageDefaite();
+                $this->vue->affichageDefaite();
+              //  $this->modele->joueurRegulier();
+                $this->modele->classementJoueurs();
+                $this->modele->getPartieGagnee($_SESSION['username']);
+                $this->modele->getNbPartie($_SESSION['username']);
+                //  $this->modele->totalPartie();
+                //  $this->modele->totalGagnee();
             } else {
                 $this->vue->affichageJeu();
                 $this->instruction();

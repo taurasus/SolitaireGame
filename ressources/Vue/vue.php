@@ -74,36 +74,6 @@ class Vue {
         echo $html; // affichage de tout l'html concaténé
     }
 
-    /*   function affichageJeuPrecedent() {
-
-      $html = "<html> \n";
-      $html .= '<head><link rel="stylesheet" type="text/css" href="css.css">';
-      $html .= '<meta charset="utf-8" />';
-      $html .= '<h1>JEU DU SOLITAIRE</h1></head>';
-      $html .= '<body bgcolor="#FFFFFF">';
-      $html .= "\n \t <table> \n";
-      for ($i = 0; $i < 9; $i++) { // lignes du plateau
-      $html .= "\t \t <tr> \n";
-      for ($j = 0; $j < 9; $j++) { // colonnes du plateau
-      $html .= "\t \t \t <td>";
-      $html .= '<form action="." method="post"><button class="classe" type="submit" name="bille" value="' . $i . ';' . $j . '"></form>';
-      if ($_SESSION['plateauPrecedent'][$i][$j] == 'O'){
-      $html .= '<div class="circleblackborder"></div>';
-      } elseif ($_SESSION['plateau'][$i][$j] == 'X'){
-      $html .= '<div class="circleblack"></div>';
-      } elseif ($_SESSION['plateau'][$i][$j] == '+'){
-      $html .= '<div class="circleblackborderred"></div>';
-      }
-      $html .= "</button></td> \n";
-      }
-      $html .= "\t \t </tr> \n";
-      }
-      $html .= "\t </table> \n";
-      $html .= '</body>';
-      $html .= "</html>";
-      echo $html; // affichage de tout l'html concaténé
-      } */
-
     function affichageVictoire() {
         $html = "<html> \n";
         $html .= '<head><link rel="stylesheet" type="text/css" href="css.css">';
@@ -112,14 +82,14 @@ class Vue {
         $html .= '<h2>Victoire !</h2></head>';
         $html .= '<body bgcolor="#FFFFFF">';
         $html .= '<form action = "." method="post">';
-        $html .= '<input class="deconnxion" type = "submit" value = "RESTART" name="reset"></form >';
+        $html .= '<input class="buttonfinish" type = "submit" value = "RESTART" name="reset"></form >';
         $html .= '<form action = "." method="post">';
-        $html .= '<input class="deconnexion" type = "submit" value = "DECONNEXION" name="deconnexion"></form >';
+        $html .= '<input class="buttonfinish" type = "submit" value = "DECONNEXION" name="deconnexion"></form >';
         $html .= '</body>';
         $html .= "</html>";
         echo $html; // affichage de tout l'html concaténé
     }
-    
+
     function affichageDefaite() {
         $html = "<html> \n";
         $html .= '<head><link rel="stylesheet" type="text/css" href="css.css">';
@@ -128,12 +98,12 @@ class Vue {
         $html .= '<h2>Défaite !</h2></head>';
         $html .= '<body bgcolor="#FFFFFF">';
         $html .= '<form action = "." method="post">';
-        $html .= '<input class="deconnxion" type = "submit" value = "RESTART" name="reset"></form >';
+        $html .= '<input class="buttonfinish" type = "submit" value = "RESTART" name="reset"></form >';
         $html .= '<form action = "." method="post">';
-        $html .= '<input class="deconnexion" type = "submit" value = "DECONNEXION" name="deconnexion"></form >';
+        $html .= '<input class="buttonfinish" type = "submit" value = "DECONNEXION" name="deconnexion"></form >';
         $html .= '</body>';
         $html .= "</html>";
         echo $html; // affichage de tout l'html concaténé
     }
-}
 
+}

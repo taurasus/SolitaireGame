@@ -1,54 +1,65 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11.1
--- http://www.phpmyadmin.net
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 11, 2016 at 12:22 PM
--- Server version: 5.5.50-0+deb7u2
--- PHP Version: 5.4.45-1~dotdeb+7.1
+-- HÃ´te : 127.0.0.1:3306
+-- GÃ©nÃ©rÃ© le :  Dim 10 dÃ©c. 2017 Ã  20:50
+-- Version du serveur :  5.7.19
+-- Version de PHP :  5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
--- Table structure for table `parties`
+--
+-- Base de donnÃ©es :  `miniprojet`
+--
 
+-- --------------------------------------------------------
 
+--
+-- Structure de la table `parties`
+--
+
+DROP TABLE IF EXISTS `parties`;
 CREATE TABLE IF NOT EXISTS `parties` (
-  `id` int(11) NOT NULL,
-  `pseudo` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `partieGagnee` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pseudo` varchar(20) NOT NULL,
+  `partieGagnee` smallint(1) NOT NULL,
+  `nbPartie` smallint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pseudo` (`pseudo`),
+  KEY `pseudo_2` (`pseudo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Indexes for dumped tables
+-- DÃ©chargement des donnÃ©es de la table `parties`
+--
+
+INSERT INTO `parties` (`id`, `pseudo`, `partieGagnee`, `nbPartie`) VALUES
+(1, 'root', 5, 8),
+(2, 'user', 0, 0),
+(3, 'seb', 0, 0),
+(4, 'tanguy', 0, 0),
+(5, 'lilian', 0, 0);
+
+--
+-- Contraintes pour les tables dÃ©chargÃ©es
 --
 
 --
--- Indexes for table `parties`
+-- Contraintes pour la table `parties`
 --
 ALTER TABLE `parties`
-  ADD PRIMARY KEY (`id`), ADD KEY `pseudo` (`pseudo`), ADD KEY `pseudo_2` (`pseudo`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `parties`
---
-ALTER TABLE `parties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `parties`
---
-ALTER TABLE `parties`
-ADD CONSTRAINT `parties_ibfk_1` FOREIGN KEY (`pseudo`) REFERENCES `joueurs` (`pseudo`);
+  ADD CONSTRAINT `parties_ibfk_1` FOREIGN KEY (`pseudo`) REFERENCES `joueurs` (`pseudo`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

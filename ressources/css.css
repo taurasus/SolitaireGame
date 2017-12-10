@@ -24,7 +24,7 @@ button{
 }
 
 table {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 section
@@ -34,7 +34,7 @@ section
 }
 
 .instruction{
-    
+
     position: relative; 
     width: 500px;
     border: 5px solid #000;
@@ -43,7 +43,7 @@ section
     padding: 30px;
     margin: auto;
     margin-bottom: 50px;
-    
+
 }
 
 .classe{
@@ -62,7 +62,7 @@ section
     color: #fff;
     text-decoration:underline;
     text-shadow:1px 1px 1px white;
-    
+
 }
 
 .mauvaiseAuthentification{

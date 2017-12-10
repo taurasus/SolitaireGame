@@ -2,8 +2,8 @@
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 05 déc. 2017 à 17:50
+-- HÃ´te : 127.0.0.1:3306
+-- GÃ©nÃ©rÃ© le :  Dim 10 dÃ©c. 2017 Ã  20:50
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `solitaire`
+-- Base de donnÃ©es :  `miniprojet`
 --
 
 -- --------------------------------------------------------
@@ -36,10 +36,13 @@ CREATE TABLE IF NOT EXISTS `joueurs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `joueurs`
+-- DÃ©chargement des donnÃ©es de la table `joueurs`
 --
 
 INSERT INTO `joueurs` (`pseudo`, `motDePasse`) VALUES
+('seb', 'seP0eVlDNLRYI'),
+('tanguy', 'taMsZJgw12Brw'),
+('lilian', 'libiPK1PpBxT6'),
 ('root', 'roK20XGbWEsSM'),
 ('user', 'us6EKZMmfBVwI');
 COMMIT;
